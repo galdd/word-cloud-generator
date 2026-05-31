@@ -1,13 +1,14 @@
-import { Router } from 'express';
-import { generateWordCloud } from './service';
+import { Router } from 'express'
+import { getWordCloud } from './service'
 
-const router = Router();
+export const wordCloudRouter = Router()
 
-// GET /api/word-cloud?text=...
-router.get('/', (req, res) => {
-  const text = String(req.query.text ?? '');
-  const result = generateWordCloud(text);
-  res.json(result);
-});
+wordCloudRouter.get('/', async (_req, res, next) => {
+  try {
+    const data = await getWordCloud()
 
-export default router;
+    res.status(200).json(data)
+  } catch (error) {
+    next(error)
+  }
+})

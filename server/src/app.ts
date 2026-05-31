@@ -1,14 +1,22 @@
-import express from 'express';
-import wordCloudRouter from './word-cloud/routes';
+import cors from 'cors'
+import express, { type NextFunction, type Request, type Response } from 'express'
+import { wordCloudRouter } from './word-cloud/routes'
 
-const app = express();
+export const app = express()
 
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' });
-});
+  res.json({ status: 'ok' })
+})
 
-app.use('/api/word-cloud', wordCloudRouter);
+app.use('/api/word-cloud', wordCloudRouter)
 
-export default app;
+app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
+  console.error(error)
+
+  res.status(500).json({
+    message: error.message || 'Internal server error',
+  })
+})
