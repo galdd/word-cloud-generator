@@ -59,7 +59,7 @@ From the project root directory:
 docker compose up --build
 ```
 
-Then open the app at:
+Then open:
 
 ```text
 http://localhost:3000
@@ -84,18 +84,6 @@ Inside Docker, Nginx proxies `/api` requests from the client container to the ba
 http://server:4000
 ```
 
-The API can also be accessed through the frontend proxy at:
-
-```text
-http://localhost:3000/api/word-cloud
-```
-
-If the server port is exposed in `docker-compose.yml`, the API can also be accessed directly at:
-
-```text
-http://localhost:4000/api/word-cloud
-```
-
 Useful Docker commands:
 
 ```bash
@@ -118,10 +106,10 @@ Start the client and server together:
 npm run dev
 ```
 
-Open the local development client at:
+Open the client at:
 
 ```text
-http://localhost:5173
+http://localhost:3000
 ```
 
 The backend runs at:
