@@ -47,6 +47,17 @@ range: [12, 64]
 
 This means the least frequent word is rendered at `12px`, the most frequent word is rendered at `64px`, and all other words are scaled proportionally between those values.
 
+Internally, the scale calculates where each word count sits between the minimum and maximum count, and maps that relative position to the font-size range.
+
+Conceptually, the calculation is equivalent to:
+
+```ts
+ratio = (count - minCount) / (maxCount - minCount)
+fontSize = MIN_FONT_SIZE + ratio * (MAX_FONT_SIZE - MIN_FONT_SIZE)
+```
+
+For example, if the minimum count is `10`, the maximum count is `110`, and a word appears `60` times, then the ratio is `0.5`. That means the word is halfway between the minimum and maximum frequency, so its font size will also be halfway between `12px` and `64px`.
+
 The scale is clamped, so values cannot produce font sizes below `12px` or above `64px`.
 
 If all words have the same count, the function returns the midpoint of the range, `38px`, so the word cloud still renders with a readable default size.
@@ -92,50 +103,6 @@ docker compose down
 docker compose logs -f
 ```
 
-## Run Locally for Development
-
-Install dependencies:
-
-```bash
-npm run install:all
-```
-
-Start the client and server together:
-
-```bash
-npm run dev
-```
-
-Open the client at:
-
-```text
-http://localhost:3000
-```
-
-The backend runs at:
-
-```text
-http://localhost:4000
-```
-
-The word cloud API is available at:
-
-```text
-http://localhost:4000/api/word-cloud
-```
-
-## Build Locally
-
-From the project root directory:
-
-```bash
-npm run build
-```
-
-This builds:
-
-- the server into `server/dist`
-- the client into `client/dist`
 
 ## Project Structure
 
