@@ -7,10 +7,6 @@ export const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' })
-})
-
 app.use('/api/word-cloud', wordCloudRouter)
 
 app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {

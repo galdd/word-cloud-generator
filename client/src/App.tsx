@@ -7,7 +7,7 @@ const { Title } = Typography;
 const tabs = [
   {
     key: 'explanation',
-    label: 'Explanation',
+    label: 'Overview',
     children: <Explanation />,
   },
   {
