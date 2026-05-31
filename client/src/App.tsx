@@ -1,5 +1,5 @@
 import { Tabs, Typography } from 'antd';
-import { Explanation } from './explanation/Explanation';
+import { Explanation } from './overview/Explanation';
 import { WordCloud } from './word-cloud/WordCloud';
 
 const { Title } = Typography;
